@@ -8,8 +8,10 @@ package finaldaproject;
 import java.util.*;
 import java.io.*;
 import org.jgrapht.*;
-import org.jgrapht.traverse.*;
 import org.jgrapht.graph.*;
+import org.jgrapht.alg.shortestpath.*;
+import org.jgrapht.*;
+import org.jgrapht.alg.util.*;
 
 
 /**
@@ -18,11 +20,13 @@ import org.jgrapht.graph.*;
  */
 
 
-public class Finaldaproject {
+
+public class Finaldaproject{
 
     /**
      * @param args the command line arguments
      */
+    
     void splitToNchar(String text, ArrayList<String> words,int size){
         int length;
         length = text.length();
@@ -49,7 +53,7 @@ public class Finaldaproject {
     }
     
     Finaldaproject(){
-        ArrayList<String> words = new ArrayList<String>(); 
+        ArrayList<String> words = new ArrayList<>(); 
         Scanner scan = new Scanner(System.in);
 
         try{
@@ -66,7 +70,7 @@ public class Finaldaproject {
         {
             System.err.printf("Error! File not found\r\n");
         }
-        DefaultDirectedGraph<String, DefaultEdge> wordladder = new DefaultDirectedGraph<String, DefaultEdge>( DefaultEdge.class);
+        DefaultDirectedGraph<String, DefaultEdge> wordladder = new DefaultDirectedGraph<>( DefaultEdge.class);
         for (int i =0 ; i<words.size();i++){
             for (int j =0 ; j<words.size();j++){
                 if (comparechar(words.get(i),words.get(j))){
@@ -80,9 +84,13 @@ public class Finaldaproject {
         System.out.printf("Ending word: ");
         end = scan.nextLine().toLowerCase();
         //Attempttobfs
-
+        BFSShortestPath<String, DefaultEdge> path = new BFSShortestPath<>(wordladder);
+        System.out.println(path.findPathBetween(wordladder, start, end));
         
-    }
+        }
+
+    
+
     public static void main(String[] args) {
         // TODO code application logic 
         Finaldaproject project = new Finaldaproject();
