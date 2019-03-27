@@ -7,17 +7,23 @@ package finaldaproject;
 
 import java.util.*;
 import java.io.*;
+import org.jgrapht.*;
+import org.jgrapht.traverse.*;
+import org.jgrapht.graph.*;
+
 
 /**
  *
  * @author Jeer
  */
+
+
 public class Finaldaproject {
 
     /**
      * @param args the command line arguments
      */
-    static void splitToNchar(String text, List<String> words,int size){
+    void splitToNchar(String text, ArrayList<String> words,int size){
         int length;
         length = text.length();
         for (int i =0; i < length; i+= size){
@@ -25,14 +31,32 @@ public class Finaldaproject {
         }
     }
     
-    public static void main(String[] args) {
-        // TODO code application logic 
-        List<String> words = new ArrayList<>();
+    boolean comparechar(String a, String b){
+        int count = 0;
+        if (a.compareToIgnoreCase(b) == 0){
+            return false;
+        }
+        for (int i =0;i<5;i++){
+            if (a.charAt(i) != b.charAt(i)){
+                count++;
+            }
+            if (count > 1){
+                return false;
+            }
+        }
+        return true;
+        
+    }
+    
+    Finaldaproject(){
+        ArrayList<String> words = new ArrayList<String>(); 
+        Scanner scan = new Scanner(System.in);
+
         try{
          Scanner input = new Scanner (new File ("words_5757.txt"));
             while (input.hasNext())
             {
-                    String line = input.nextLine();
+                    String line = input.nextLine().toLowerCase();
                     splitToNchar(line, words, 5);
                 
             }
@@ -42,6 +66,25 @@ public class Finaldaproject {
         {
             System.err.printf("Error! File not found\r\n");
         }
+        DefaultDirectedGraph<String, DefaultEdge> wordladder = new DefaultDirectedGraph<String, DefaultEdge>( DefaultEdge.class);
+        for (int i =0 ; i<words.size();i++){
+            for (int j =0 ; j<words.size();j++){
+                if (comparechar(words.get(i),words.get(j))){
+                    Graphs.addEdgeWithVertices(wordladder,words.get(i),words.get(j));
+                }
+            }
+        }
+        String start,end;
+        System.out.printf("Your starting word: ");
+        start = scan.nextLine().toLowerCase();
+        System.out.printf("Ending word: ");
+        end = scan.nextLine().toLowerCase();
+
+        
+    }
+    public static void main(String[] args) {
+        // TODO code application logic 
+        Finaldaproject project = new Finaldaproject();
         
         
     }
