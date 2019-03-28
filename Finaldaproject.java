@@ -81,11 +81,16 @@ public class Finaldaproject{
             try{
                 System.out.printf("Your starting word: ");
                 start = scan.nextLine().toLowerCase();
-                if (search.get(start.charAt(0)).contains(start)){
+                if (wordladder.containsVertex(start)){
                     run = false;
                 }
                 else{
-                    System.out.println("Word is not in the dictionary");
+                    if (search.get(start.charAt(0)).contains(start)){
+                        System.out.println(start + " cannot be transformed into anything!");
+                    }
+                    else{
+                        System.out.println(start + " is not in the dictionary");
+                    }
                 }
             }
             catch(Exception e){
@@ -97,11 +102,16 @@ public class Finaldaproject{
             try{
                 System.out.printf("Ending word: ");
                 end = scan.nextLine().toLowerCase();
-                if (search.get(end.charAt(0)).contains(end)){
+                if (wordladder.containsVertex(end)){
                     run = false;
                 }
                 else{
-                    System.out.println("Word is not in the dictionary");
+                    if (search.get(end.charAt(0)).contains(end)){
+                        System.out.println(end + " cannot be transformed into anything!");
+                    }
+                    else{
+                        System.out.println(end + " is not in the dictionary");
+                    }
                 }
             }
             catch(Exception e){
