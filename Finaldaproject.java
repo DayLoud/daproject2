@@ -222,10 +222,6 @@ public class Finaldaproject{
                     Graphs.addEdgeWithVertices(wordladder,words.get(i),words.get(j));
                 }          
             }
-            if (!wordladder.containsVertex(words.get(i))){
-                wordladder.removeVertex(words.get(i));
-                search.get(words.get(i).charAt(0)).remove(words.get(i));
-            }
         }
         
         boolean validation = false, run = true;
