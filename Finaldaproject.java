@@ -145,9 +145,24 @@ public class Finaldaproject{
     }
     
     void searchdic(TreeMap<Character, HashSet<String>> search){
-        System.out.printf("Search Dictionary\nSearch your word: ");
         Scanner scan = new Scanner(System.in);
-        String word = scan.nextLine();
+        boolean valid = false;
+        String word = null;
+        while(!valid){
+            try{
+                System.out.printf("Search Dictionary\nSearch your word: ");
+                word = scan.nextLine();
+                if (word.length() > 5){
+                    System.err.println("Our list only contains words of 5 characters long!");
+                }
+                else{
+                    valid = true;
+                }
+            }
+            catch(Exception e){
+                System.err.println(e);
+            }
+        }
         HashSet<String> wordlist = search.get(word.charAt(0));
         Iterator ite = wordlist.iterator();
         boolean match = true,exist = false;
